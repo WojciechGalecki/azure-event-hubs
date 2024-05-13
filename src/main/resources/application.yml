@@ -1,0 +1,20 @@
+kafka:
+  topics:
+    events: events
+
+spring:
+  kafka:
+    bootstrap-servers: <eventhub-namespace>.servicebus.windows.net:9093
+    properties:
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="<eventhub-connection-string>";
+      sasl.mechanism: PLAIN
+      security.protocol: SASL_SSL
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: event-hubs
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "wg.eventhubs.model"

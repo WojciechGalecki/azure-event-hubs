@@ -1,1 +1,1 @@
-# azure-event-hubs
+# Spring Boot application setup for Azure Event Hubs with Kafka protocol
